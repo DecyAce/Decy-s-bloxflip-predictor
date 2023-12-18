@@ -4,18 +4,18 @@ import re
 
 def format_numbers(event):
     clipboard_text = entry.clipboard_get()
-    formatted_text = re.sub(r'\s+', ', ', clipboard_text)  # Replace all whitespaces with commas and spaces
+    formatted_text = re.sub(r'\s+', ', ', clipboard_text)  
     formatted_text = re.sub(r'(?<!\d)(\d+\.\d{2}|\b\d\b|\d+)\b', r'\1, ',
-                            formatted_text)  # Add comma after numbers with 2 decimals or whole numbers
-    formatted_text = re.sub(r',\s$', '', formatted_text)  # Remove the last comma and space
+                            formatted_text)  
+    formatted_text = re.sub(r',\s$', '', formatted_text)  
     entry.delete(0, tk.END)
     entry.insert(0, formatted_text)
     return 'break'
 
 
 def get_crash_numbers():
-    crash_text = entry.get().replace('\n', '')  # Remove newlines
-    crash_numbers = re.findall(r'\d+\.\d{2}', crash_text)  # Find all numbers with 2 decimals
+    crash_text = entry.get().replace('\n', '')  
+    crash_numbers = re.findall(r'\d+\.\d{2}', crash_text)  
 
     below_2 = sum(1 for num in crash_numbers if float(num) < 2)
     above_2 = sum(1 for num in crash_numbers if float(num) > 2)
@@ -76,8 +76,8 @@ def create_blank_window():
     window = tk.Tk()
     window.title("Decy's Bloxflip Predictor")
 
-    window.geometry("700x600")  # Adjusted dimensions
-    window.configure(bg="#f0f0f0")  # Changed to a light gray background
+    window.geometry("700x600")  # You can adjust the dimensions
+    window.configure(bg="#f0f0f0")  
 
     label = tk.Label(window, text="Paste last 7 crash numbers:", bg="#f0f0f0", font=("Arial", 12))
     label.pack(pady=10)
